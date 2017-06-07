@@ -42,8 +42,8 @@ public class LoanOffersFragment extends Fragment implements View.OnClickListener
 
     public LayoutManagerType mCurrentLayoutManagerType;
 
+    public MainActivity mainActivity;
     private View view;
-    private MainActivity mainActivity;
     private SharedPreferences mainPref;
     private LoanOfferRecyclerAdapter loanOfferRecyclerAdapter;
     private List<LoanOffer> offers;
@@ -93,11 +93,13 @@ public class LoanOffersFragment extends Fragment implements View.OnClickListener
                 Log.d("Offers", response.message());
                 Log.d("Offers", call.request().url().toString());
                 List<LoanOffer> loanOffers = response.body();
-                Log.d("Offers", "Number of offers: " + loanOffers.size());
-                for (int i = 0; i < loanOffers.size(); i++) {
-                    LoanOffer loanOffer = loanOffers.get(i);
-                    offers.add(loanOffer);
-                    loanOfferRecyclerAdapter.notifyItemChanged(i);
+                if (loanOffers != null) {
+                    Log.d("Offers", "Number of offers: " + loanOffers.size());
+                    for (int i = 0; i < loanOffers.size(); i++) {
+                        LoanOffer loanOffer = loanOffers.get(i);
+                        offers.add(loanOffer);
+                        loanOfferRecyclerAdapter.notifyItemChanged(i);
+                    }
                 }
             }
 
@@ -109,7 +111,7 @@ public class LoanOffersFragment extends Fragment implements View.OnClickListener
             }
         });
 
-        loanOfferRecyclerAdapter = new LoanOfferRecyclerAdapter(offers);
+        loanOfferRecyclerAdapter = new LoanOfferRecyclerAdapter(offers, getContext());
         mRecyclerView.setAdapter(loanOfferRecyclerAdapter);
 
         createOffer = (FloatingActionButton) view.findViewById(R.id.offerFragCreateFab);

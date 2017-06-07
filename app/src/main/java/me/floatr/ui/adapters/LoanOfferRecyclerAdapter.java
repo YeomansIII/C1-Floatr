@@ -5,6 +5,7 @@ package me.floatr.ui.adapters;
  */
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -21,6 +22,9 @@ import butterknife.ButterKnife;
 import me.floatr.R;
 import me.floatr.models.LoanOffer;
 import me.floatr.models.Offer;
+import me.floatr.ui.activities.MainActivity;
+import me.floatr.ui.fragments.LoanOffersFragment;
+import me.floatr.ui.fragments.OfferDetailsFragment;
 
 /**
  * Created by jason on 2/9/16.
@@ -29,13 +33,13 @@ public class LoanOfferRecyclerAdapter extends RecyclerView.Adapter<LoanOfferRecy
 
     List<LoanOffer> loanOffers;
     Context context;
-    AppCompatActivity activity;
+
 
     public LoanOfferRecyclerAdapter() {
         loanOffers = new ArrayList<>();
     }
 
-    public LoanOfferRecyclerAdapter(List<LoanOffer> loanOffers) {
+    public LoanOfferRecyclerAdapter(List<LoanOffer> loanOffers, Context context) {
         this.loanOffers = loanOffers;
     }
 
@@ -59,12 +63,15 @@ public class LoanOfferRecyclerAdapter extends RecyclerView.Adapter<LoanOfferRecy
         holder.offerItemRange.setText(loanOffer.getMinOffer() + " - " + loanOffer.getMaxOffer());
         holder.offerItemInterest.setText("" + loanOffer.getInterestRate() + "%");
         holder.offerItemPeriod.setText(loanOffer.getPeriod() + " " + loanOffer.getPeriodUnit());
+        holder.loanID = loanOffer.getId();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
         Context context;
+        String loanID;
+
         @BindView(R.id.offerItemRange)
         TextView offerItemRange;
         @BindView(R.id.offerItemInterest)
@@ -86,6 +93,11 @@ public class LoanOfferRecyclerAdapter extends RecyclerView.Adapter<LoanOfferRecy
 
         @Override
         public void onClick(View view) {
+            Bundle bundle = new Bundle();
+            bundle.putString("id", loanID);
+            OfferDetailsFragment detailFrag = new OfferDetailsFragment();
+            detailFrag.setArguments(bundle);
+            ((MainActivity)this.context).getSupportFragmentManager().beginTransaction().replace(R.id.container, detailFrag).commit();
         }
     }
 
