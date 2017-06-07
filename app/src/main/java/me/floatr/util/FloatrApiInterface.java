@@ -7,6 +7,7 @@ import me.floatr.models.Loan;
 import me.floatr.models.LoanOffer;
 import me.floatr.models.Login;
 import me.floatr.models.Payment;
+import me.floatr.models.Register;
 import me.floatr.models.User;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -65,7 +66,7 @@ public interface FloatrApiInterface {
     Call<Payment> getPayment(@Path("id") String paymentId);
 
     @POST("auth/register")
-    Call<Auth> register(@Body User user);
+    Call<Auth> register(@Body Register login);
 
     @POST("auth/login")
     Call<Auth> login(@Body Login login);
