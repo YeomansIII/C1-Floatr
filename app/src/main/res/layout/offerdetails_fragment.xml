@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <ImageView
+            android:id="@+id/profpic"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/account" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/profpic"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/offerDetailFragNameText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Name" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/offerDetailFragMinRangeText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Min Range: "
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/offerDetailFragMinRangeValue"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/offerDetailFragMinRangeText"
+            android:text="$200"
+            android:textColor="@color/material_color_black"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/offerDetailFragMaxRangeText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Max Range: "
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/offerDetailFragMaxRangeValue"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/offerDetailFragMaxRangeText"
+            android:text="$300"
+            android:textColor="@color/material_color_black"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/offerDetailFragInterestRateText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Interest Rate: "
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/offerDetailFragInterestRateValue"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/offerDetailFragInterestRateText"
+            android:text="7%"
+            android:textColor="@color/material_color_black"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/offerDetailFragPeriodText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Period "
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/offerDetailFragPeriodValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/offerDetailFragPeriodText"
+            android:text="3"
+            android:textColor="@color/material_color_black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/offerDetailFragPeriodUnit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/offerDetailFragPeriodText"
+            android:layout_marginLeft="4dp"
+            android:layout_toRightOf="@+id/offerDetailFragPeriodValue"
+            android:text="Days"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+</LinearLayout>

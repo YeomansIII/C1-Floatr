@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/home"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_offers"
+            android:icon="@drawable/currency_usd"
+            android:title="Your Offers" />
+        <item
+            android:id="@+id/nav_loans"
+            android:icon="@drawable/handshake"
+            android:title="Your Loans" />
+
+    </group>
+
+    <item android:title="Settings">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/help_circle"
+                android:title="Help" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/settings"
+                android:title="Settings" />
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/account"
+                android:title="Logout" />
+        </menu>
+    </item>
+
+</menu>
