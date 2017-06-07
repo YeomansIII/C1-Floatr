@@ -22,6 +22,9 @@
 
 public class User {
 
+    @SerializedName("_id")
+    @Expose
+    private String id;
     @SerializedName("first_name")
     @Expose
     private String firstName;
@@ -233,4 +236,11 @@ public class User {
         this.status = status;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }

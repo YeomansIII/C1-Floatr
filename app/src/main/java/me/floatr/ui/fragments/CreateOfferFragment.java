@@ -80,7 +80,7 @@ public class CreateOfferFragment extends Fragment implements View.OnClickListene
             newOffer.setInterestRate(Integer.parseInt(createOfferFragInterestRate.getEditText().getText().toString()));
             newOffer.setPeriod(Integer.parseInt(createOfferFragPeriod.getEditText().getText().toString()));
             newOffer.setPeriodUnit(dropdown.getSelectedItem().toString());
-            Call<LoanOffer> call = mainActivity.apiService.createLoadOffer(newOffer);
+            Call<LoanOffer> call = mainActivity.apiService.createLoanOffer(newOffer);
             call.enqueue(new Callback<LoanOffer>() {
                 @Override
                 public void onResponse(Call<LoanOffer> call, Response<LoanOffer> response) {

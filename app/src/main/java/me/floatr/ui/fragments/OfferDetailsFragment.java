@@ -66,7 +66,7 @@ public class OfferDetailsFragment extends Fragment implements View.OnClickListen
 
         offerId = getArguments().getString("id");
 
-        Call<LoanOffer> offerCall = mainActivity.apiService.getLoadOffer(offerId);
+        Call<LoanOffer> offerCall = mainActivity.apiService.getLoanOffer(offerId);
         offerCall.enqueue(new Callback<LoanOffer>() {
             @Override
             public void onResponse(Call<LoanOffer> call, Response<LoanOffer> response) {
@@ -74,7 +74,7 @@ public class OfferDetailsFragment extends Fragment implements View.OnClickListen
                 offerDetailFragMinRangeValue.setText(offer.getMinOffer());
                 offerDetailFragMaxRangeValue.setText(offer.getMaxOffer());
                 offerDetailFragMaxRangeValue.setText(offer.getMaxOffer());
-                offerDetailFragInterestRateValue.setText(offer.getInterestRate());
+                offerDetailFragInterestRateValue.setText("" + offer.getInterestRate());
                 offerDetailFragPeriodValue.setText(offer.getPeriod());
                 offerDetailFragPeriodUnit.setText(offer.getPeriodUnit());
             }

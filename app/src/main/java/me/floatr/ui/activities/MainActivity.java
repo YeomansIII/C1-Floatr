@@ -21,7 +21,7 @@ import butterknife.ButterKnife;
 import me.floatr.R;
 import me.floatr.ui.fragments.HomeFragment;
 import me.floatr.ui.fragments.LoginFragment;
-import me.floatr.ui.fragments.OffersFragment;
+import me.floatr.ui.fragments.LoanOffersFragment;
 import me.floatr.util.FloatrApiInterface;
 import me.floatr.util.PreferenceNames;
 import me.floatr.util.ServiceGenerator;
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity
         Log.d(TAG, "Nav press: " + item.getTitle());
         if (id == R.id.nav_home) {
             Log.d(TAG, "Nav home");
-            getSupportFragmentManager().beginTransaction().replace(R.id.container, new OffersFragment()).addToBackStack(null).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, new LoanOffersFragment()).addToBackStack(null).commit();
             // Handle the camera action
         } else if (id == R.id.nav_offers) {
 

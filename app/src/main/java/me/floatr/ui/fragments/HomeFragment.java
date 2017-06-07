@@ -45,7 +45,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         ViewPager viewPager = (ViewPager) view.findViewById(R.id.viewPager);
         mainActivity.getSupportActionBar().setTitle("Floatr");
 //set adapter to your ViewPager
-        viewPager.setAdapter(new TabPagerAdapter(getFragmentManager()));
+        viewPager.setAdapter(new TabPagerAdapter(getChildFragmentManager()));
 
         TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);

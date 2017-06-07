@@ -1,9 +1,7 @@
 package me.floatr.ui.fragments;
 
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
@@ -17,9 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.floatr.R;
+import me.floatr.models.LoanOffer;
 import me.floatr.models.Offer;
 import me.floatr.ui.activities.MainActivity;
-import me.floatr.ui.adapters.OfferRecyclerAdapter;
+import me.floatr.ui.adapters.LoanOfferRecyclerAdapter;
 import me.floatr.util.PreferenceNames;
 
 /**
@@ -41,8 +40,8 @@ public class YourOffersFragment extends Fragment implements View.OnClickListener
     private View view;
     private MainActivity mainActivity;
     private SharedPreferences mainPref;
-    private OfferRecyclerAdapter offerRecyclerAdapter;
-    private List<Offer> offers;
+    private LoanOfferRecyclerAdapter loanOfferRecyclerAdapter;
+    private List<LoanOffer> offers;
 
 
 
@@ -82,11 +81,11 @@ public class YourOffersFragment extends Fragment implements View.OnClickListener
                 1);
         mRecyclerView.addItemDecoration(dividerItemDecoration);
 
-        offers.add(new Offer());
-        offers.add(new Offer());
+        offers.add(new LoanOffer());
+        offers.add(new LoanOffer());
 
-        offerRecyclerAdapter = new OfferRecyclerAdapter(offers);
-        mRecyclerView.setAdapter(offerRecyclerAdapter);
+        loanOfferRecyclerAdapter = new LoanOfferRecyclerAdapter(offers);
+        mRecyclerView.setAdapter(loanOfferRecyclerAdapter);
 
 
 

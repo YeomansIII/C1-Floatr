@@ -7,7 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import me.floatr.ui.fragments.OffersFragment;
+import me.floatr.ui.fragments.LoanOffersFragment;
 import me.floatr.ui.fragments.RequestsFragment;
 
 
@@ -15,7 +15,6 @@ public class TabPagerAdapter extends FragmentStatePagerAdapter {
     private String[] tabs = { "Offers", "Requests"};
     public TabPagerAdapter(FragmentManager fm) {
         super(fm);
-
     }
 
     @Override
@@ -23,7 +22,7 @@ public class TabPagerAdapter extends FragmentStatePagerAdapter {
         switch (i) {
             case 0:
                 //Fragement for Local Recipe
-                return new OffersFragment();
+                return new LoanOffersFragment();
             case 1:
                 //Fragment for Remote Recipe
                 return new RequestsFragment();

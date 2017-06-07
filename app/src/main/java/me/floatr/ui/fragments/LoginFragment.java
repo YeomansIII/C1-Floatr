@@ -88,7 +88,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                             Log.d("Login", response.message());
                             Log.d("Login", call.request().url().toString());
                             User user = response.body();
-                            pref.edit().putString(PreferenceNames.PREF_USER_FIRST_NAME, user.getFirstName())
+                            pref.edit()
+                                    .putString(PreferenceNames.PREF_USER_FIRST_NAME, user.getFirstName())
                                     .putString(PreferenceNames.PREF_USER_LAST_NAME, user.getLastName())
                                     .putString(PreferenceNames.PREF_USER_CUSTOMER_ID, user.getCustomerId())
                                     .putInt(PreferenceNames.PREF_USER_RATING, user.getRating())

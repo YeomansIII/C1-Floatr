@@ -2,6 +2,8 @@ package me.floatr.util;
 
 import android.content.IntentFilter;
 
+import java.util.List;
+
 import me.floatr.models.Auth;
 import me.floatr.models.Loan;
 import me.floatr.models.LoanOffer;
@@ -35,7 +37,7 @@ public interface FloatrApiInterface {
     Call<User> getUser(@Path("id") String userId);
 
     @POST("loans")
-    Call<Loan> createLoan(@Body Loan loan);
+    Call<List<Loan>> createLoan(@Body Loan loan);
 
     @PUT("loans/{id}")
     Call<Loan> updateLoan(@Path("id") String loanId, @Body Loan loan);
@@ -44,22 +46,22 @@ public interface FloatrApiInterface {
     Call<Loan> getLoan(@Path("id") String loanId);
 
     @GET("loan-offer")
-    Call<LoanOffer> getLoanOffer();
+    Call<List<LoanOffer>> getLoanOffers();
 
     @POST("loan-offer")
-    Call<LoanOffer> createLoadOffer(@Body LoanOffer loanOffer);
+    Call<LoanOffer> createLoanOffer(@Body LoanOffer loanOffer);
 
     @PUT("loan-offer/{id}")
-    Call<LoanOffer> updateLoadOffer(@Path("id") String offerId, @Body LoanOffer loanOffer);
+    Call<LoanOffer> updateLoanOffer(@Path("id") String offerId, @Body LoanOffer loanOffer);
 
     @GET("loan-offer/{id}")
-    Call<LoanOffer> getLoadOffer(@Path("id") String groupId);
+    Call<LoanOffer> getLoanOffer(@Path("id") String groupId);
 
     @DELETE("loan-offer/{id}")
-    Call<LoanOffer> deleteLoadOffer(@Path("id") String offerId);
+    Call<LoanOffer> deleteLoanOffer(@Path("id") String offerId);
 
     @POST("payments")
-    Call<Payment> createPayment(@Body Payment payment);
+    Call<List<Payment>> createPayment(@Body Payment payment);
 
     @GET("payments/{id}")
     Call<Payment> getPayment(@Path("id") String paymentId);
