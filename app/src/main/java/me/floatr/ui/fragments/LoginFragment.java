@@ -75,6 +75,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 @Override
                 public void onResponse(Call<Auth> call, Response<Auth> response) {
                     Auth auth = response.body();
+                    Log.d("Login", response.toString());
                     pref.edit().putString(PreferenceNames.PREF_USER_TOKEN, auth.getToken())
                             .putString(PreferenceNames.PREF_USER_ID, auth.getId())
                             .putString(PreferenceNames.PREF_USER_USERNAME, auth.getUsername())
