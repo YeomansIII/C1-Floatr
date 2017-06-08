@@ -122,4 +122,10 @@ public class LoanOffer {
         this.periodUnit = periodUnit;
     }
 
+    public String toString() {
+        return "loaner: " + this.loaner + "; " + "max: " + this.maxOffer + "; "
+                +"min: " + this.minOffer + "; " + "interest_rate: " + this.interestRate + "; "
+                +"period: " + this.period + "; " + "periodUnit: " + this.periodUnit;
+    }
+
 }

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,9 @@ import butterknife.ButterKnife;
 import me.floatr.R;
 import me.floatr.models.LoanOffer;
 import me.floatr.ui.activities.MainActivity;
+import me.floatr.util.FloatrApiInterface;
 import me.floatr.util.PreferenceNames;
+import me.floatr.util.ServiceGenerator;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -31,7 +34,7 @@ public class CreateOfferFragment extends Fragment implements View.OnClickListene
 
     private View view;
     private MainActivity mainActivity;
-    private SharedPreferences mainPref, groupPref;
+
     @BindView(R.id.createOfferSpinner)
     public Spinner dropdown;
     @BindView(R.id.createOfferFragMin)
@@ -45,12 +48,15 @@ public class CreateOfferFragment extends Fragment implements View.OnClickListene
     @BindView(R.id.createOfferFragCreateButton)
     public Button createOfferFragCreateButton;
 
+
+    private SharedPreferences pref;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         mainActivity = (MainActivity) getActivity();
-        mainPref = mainActivity.getSharedPreferences(PreferenceNames.MAIN_PREFS_NAME, 0);
+        pref = mainActivity.getSharedPreferences(PreferenceNames.MAIN_PREFS_NAME, 0);
     }
 
     @Override
@@ -61,7 +67,7 @@ public class CreateOfferFragment extends Fragment implements View.OnClickListene
         ButterKnife.bind(this, view);
         mainActivity.getSupportActionBar().setTitle("Create Loan Offer");
         dropdown = (Spinner) view.findViewById(R.id.createOfferSpinner);
-        String[] items = new String[]{"Days", "Months", "Years"};
+        String[] items = new String[]{"day", "month", "year"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, items);
         dropdown.setAdapter(adapter);
 
@@ -75,11 +81,15 @@ public class CreateOfferFragment extends Fragment implements View.OnClickListene
     public void onClick(View v) {
         if (v == createOfferFragCreateButton) {
             LoanOffer newOffer = new LoanOffer();
+            Log.d("CreateOffer", pref.getString(PreferenceNames.PREF_USER_MONGO_ID, "ID from Mongo is NULL"));
+            newOffer.setLoaner(pref.getString(PreferenceNames.PREF_USER_MONGO_ID, ""));
             newOffer.setMinOffer(Integer.parseInt(createOfferFragMin.getEditText().getText().toString()));
             newOffer.setMaxOffer(Integer.parseInt(createOfferFragMax.getEditText().getText().toString()));
-            newOffer.setInterestRate(Integer.parseInt(createOfferFragInterestRate.getEditText().getText().toString()));
+            newOffer.setInterestRate(Double.parseDouble(createOfferFragInterestRate.getEditText().getText().toString()));
             newOffer.setPeriod(Integer.parseInt(createOfferFragPeriod.getEditText().getText().toString()));
-            newOffer.setPeriodUnit(dropdown.getSelectedItem().toString());
+            newOffer.setPeriodUnit(dropdown.getSelectedItem().toString().toLowerCase());
+            Log.d("CreateOffer" , newOffer.toString());
+            mainActivity.apiService = ServiceGenerator.createService(FloatrApiInterface.class, pref.getString(PreferenceNames.PREF_USER_TOKEN, ""));
             Call<LoanOffer> call = mainActivity.apiService.createLoanOffer(newOffer);
             call.enqueue(new Callback<LoanOffer>() {
                 @Override
@@ -89,6 +99,7 @@ public class CreateOfferFragment extends Fragment implements View.OnClickListene
                     bundle.putString("id", response.body().getId());
                     OfferDetailsFragment detailFrag = new OfferDetailsFragment();
                     detailFrag.setArguments(bundle);
+                    mainActivity.getSupportFragmentManager().beginTransaction().replace(R.id.container, detailFrag).addToBackStack(null).commit();
                 }
 
                 @Override

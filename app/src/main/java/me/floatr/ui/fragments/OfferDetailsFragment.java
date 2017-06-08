@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,16 +32,22 @@ public class OfferDetailsFragment extends Fragment implements View.OnClickListen
     private View view;
     private MainActivity mainActivity;
     private SharedPreferences mainPref;
+
     @BindView(R.id.offerDetailFragNameText)
     public TextView offerDetailFragNameText;
+
     @BindView(R.id.offerDetailFragMinRangeValue)
     public TextView offerDetailFragMinRangeValue;
+
     @BindView(R.id.offerDetailFragMaxRangeValue)
     public TextView offerDetailFragMaxRangeValue;
+
     @BindView(R.id.offerDetailFragInterestRateValue)
     public TextView offerDetailFragInterestRateValue;
+
     @BindView(R.id.offerDetailFragPeriodValue)
     public TextView offerDetailFragPeriodValue;
+
     @BindView(R.id.offerDetailFragPeriodUnit)
     public TextView offerDetailFragPeriodUnit;
 
@@ -58,9 +65,25 @@ public class OfferDetailsFragment extends Fragment implements View.OnClickListen
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.createoffer_fragment,
+        View view = inflater.inflate(R.layout.offerdetails_fragment,
                 container, false);
         ButterKnife.bind(this, view);
+
+        view.setFocusableInTouchMode(true);
+        view.requestFocus();
+        view.setOnKeyListener( new View.OnKeyListener()
+        {
+            @Override
+            public boolean onKey( View v, int keyCode, KeyEvent event )
+            {
+                if( keyCode == KeyEvent.KEYCODE_BACK )
+                {
+                    mainActivity.getSupportFragmentManager().beginTransaction().replace(R.id.container, new HomeFragment()).commit();
+                    return true;
+                }
+                return false;
+            }
+        } );
 
         mainActivity.getSupportActionBar().setTitle("Loan Offer");
 
@@ -71,12 +94,11 @@ public class OfferDetailsFragment extends Fragment implements View.OnClickListen
             @Override
             public void onResponse(Call<LoanOffer> call, Response<LoanOffer> response) {
                 offer = response.body();
-                offerDetailFragMinRangeValue.setText(offer.getMinOffer());
-                offerDetailFragMaxRangeValue.setText(offer.getMaxOffer());
-                offerDetailFragMaxRangeValue.setText(offer.getMaxOffer());
+                offerDetailFragMinRangeValue.setText("" + offer.getMinOffer());
+                offerDetailFragMaxRangeValue.setText("" + offer.getMaxOffer());
                 offerDetailFragInterestRateValue.setText("" + offer.getInterestRate());
-                offerDetailFragPeriodValue.setText(offer.getPeriod());
-                offerDetailFragPeriodUnit.setText(offer.getPeriodUnit());
+                offerDetailFragPeriodValue.setText("" + offer.getPeriod());
+                offerDetailFragPeriodUnit.setText("" + offer.getPeriodUnit());
             }
 
             @Override
@@ -88,6 +110,8 @@ public class OfferDetailsFragment extends Fragment implements View.OnClickListen
         this.view = view;
         return view;
     }
+
+
 
     @Override
     public void onClick(View v) {

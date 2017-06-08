@@ -84,7 +84,7 @@ public class YourOffersFragment extends Fragment implements View.OnClickListener
         offers.add(new LoanOffer());
         offers.add(new LoanOffer());
 
-        loanOfferRecyclerAdapter = new LoanOfferRecyclerAdapter(offers);
+        loanOfferRecyclerAdapter = new LoanOfferRecyclerAdapter(offers, getContext());
         mRecyclerView.setAdapter(loanOfferRecyclerAdapter);
 
 

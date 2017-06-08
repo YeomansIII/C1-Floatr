@@ -48,7 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Interest Rate(%)"
-            android:inputType="number" />
+            android:inputType="number|numberDecimal" />
 
 
     </android.support.design.widget.TextInputLayout>
