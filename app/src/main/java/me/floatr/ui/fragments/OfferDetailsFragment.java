@@ -199,7 +199,7 @@ public class OfferDetailsFragment extends Fragment implements View.OnClickListen
             public void onClick(View v) {
 
                 if (offer.getStatus().equals("initiated")) {
-                    mainActivity.getSupportFragmentManager().beginTransaction().replace(R.id.container, new LoanOffersFragment()).commit();
+                    mainActivity.getSupportFragmentManager().beginTransaction().replace(R.id.container, new YourOffersFragment()).commit();
                     return;
                 }
 
