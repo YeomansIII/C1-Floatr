@@ -7,7 +7,6 @@ import java.util.List;
 import me.floatr.models.Auth;
 import me.floatr.models.Loan;
 import me.floatr.models.LoanOffer;
-import me.floatr.models.LoanRequest;
 import me.floatr.models.Login;
 import me.floatr.models.Payment;
 import me.floatr.models.Register;
@@ -61,21 +60,6 @@ public interface FloatrApiInterface {
 
     @DELETE("loan-offer/{id}")
     Call<LoanOffer> deleteLoanOffer(@Path("id") String offerId);
-
-    @GET("loan-request")
-    Call<List<LoanRequest>> getLoanRequests();
-
-    @POST("loan-request")
-    Call<LoanRequest> createLoanRequest(@Body LoanRequest loanRequest);
-
-    @PUT("loan-request/{id}")
-    Call<LoanRequest> updateLoanOffer(@Path("id") String requestId, @Body LoanRequest loanRequest);
-
-    @GET("loan-request/{id}")
-    Call<LoanRequest> getLoanRequest(@Path("id") String groupId);
-
-    @DELETE("loan-request/{id}")
-    Call<LoanRequest> deleteLoanRequest(@Path("id") String requestId);
 
     @POST("payments")
     Call<List<Payment>> createPayment(@Body Payment payment);

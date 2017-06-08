@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,6 +22,7 @@ import me.floatr.R;
 import me.floatr.models.LoanOffer;
 import me.floatr.ui.activities.MainActivity;
 import me.floatr.ui.fragments.OfferDetailsFragment;
+
 
 /**
  * Created by jason on 2/9/16.
@@ -45,7 +47,7 @@ public class LoanOfferRecyclerAdapter extends RecyclerView.Adapter<LoanOfferRecy
         LayoutInflater inflater = LayoutInflater.from(context);
 
         // Inflate the custom layout
-        View offerView = inflater.inflate(R.layout.pre_loan_item, parent, false);
+        View offerView = inflater.inflate(R.layout.offer_item, parent, false);
 
         // Return a new holder instance
         ViewHolder viewHolder = new ViewHolder(offerView, context);
@@ -67,11 +69,12 @@ public class LoanOfferRecyclerAdapter extends RecyclerView.Adapter<LoanOfferRecy
         // for any view that will be set as you render a row
         Context context;
         String loanID;
-        @BindView(R.id.preLoanItemRange)
+
+        @BindView(R.id.offerItemRange)
         TextView offerItemRange;
-        @BindView(R.id.preLoanItemInterest)
+        @BindView(R.id.offerItemInterest)
         TextView offerItemInterest;
-        @BindView(R.id.preLoanItemPeriod)
+        @BindView(R.id.offerItemPeriod)
         TextView offerItemPeriod;
 
         // We also create a constructor that accepts the entire item row
