@@ -29,6 +29,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/offerDetailFragMinRange"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:padding="16dp">
@@ -51,6 +52,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/offerDetailFragMaxRange"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:padding="16dp">

@@ -43,6 +43,11 @@ public class OfferDetailsFragment extends Fragment implements View.OnClickListen
     private MainActivity mainActivity;
     private SharedPreferences mainPref;
 
+    @BindView(R.id.offerDetailFragMaxRange)
+    public View offerDetailFragMaxRange;
+    @BindView(R.id.offerDetailFragMinRange)
+    public View offerDetailFragMinRange;
+
     @BindView(R.id.offerDetailFragNameText)
     public TextView offerDetailFragNameText;
 
@@ -104,19 +109,16 @@ public class OfferDetailsFragment extends Fragment implements View.OnClickListen
 
         view.setFocusableInTouchMode(true);
         view.requestFocus();
-        view.setOnKeyListener( new View.OnKeyListener()
-        {
+        view.setOnKeyListener(new View.OnKeyListener() {
             @Override
-            public boolean onKey( View v, int keyCode, KeyEvent event )
-            {
-                if( keyCode == KeyEvent.KEYCODE_BACK )
-                {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
                     mainActivity.getSupportFragmentManager().beginTransaction().replace(R.id.container, new LoanOffersFragment()).commit();
                     return true;
                 }
                 return false;
             }
-        } );
+        });
 
         mainActivity.getSupportActionBar().setTitle("Loan Offer");
 
@@ -153,8 +155,8 @@ public class OfferDetailsFragment extends Fragment implements View.OnClickListen
                     offerDetailFragNameText.setText(firstname + " " + lastName);
                     sliderMinRange.setVisibility(View.INVISIBLE);
                     sliderMaxRange.setVisibility(View.INVISIBLE);
-                    offerDetailFragMaxRangeValue.setVisibility(View.INVISIBLE);
-                    offerDetailFragMinRangeValue.setVisibility(View.INVISIBLE);
+                    offerDetailFragMaxRange.setVisibility(View.GONE);
+                    offerDetailFragMinRange.setVisibility(View.GONE);
                     double progress = ((double) (initiate - offer.getMinOffer())) / (offer.getMaxOffer() - offer.getMinOffer()) * 100;
                     seekBar.setProgress((int) progress);
                     seekBar.setEnabled(false);
@@ -170,12 +172,11 @@ public class OfferDetailsFragment extends Fragment implements View.OnClickListen
         });
 
 
-
         seekBar.setMax(100);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                double percent = (double)progress/100;
+                double percent = (double) progress / 100;
                 int min = offer.getMinOffer();
                 int max = offer.getMaxOffer();
                 double prog = min + (percent * (max - min));
@@ -210,7 +211,7 @@ public class OfferDetailsFragment extends Fragment implements View.OnClickListen
 
 
                 Call<Loan> loanCall = mainActivity.apiService.initiate(offer.getId(), new Initiate(
-                        Integer.parseInt(sliderText.getText().toString()), (String) bankDropdown.getSelectedItem() ));
+                        Integer.parseInt(sliderText.getText().toString()), (String) bankDropdown.getSelectedItem()));
                 loanCall.enqueue(new Callback<Loan>() {
                     @Override
                     public void onResponse(Call<Loan> call, Response<Loan> response) {
@@ -228,11 +229,9 @@ public class OfferDetailsFragment extends Fragment implements View.OnClickListen
         });
 
 
-
         this.view = view;
         return view;
     }
-
 
 
     @Override
