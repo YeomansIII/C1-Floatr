@@ -203,7 +203,7 @@ public class OfferDetailsFragment extends Fragment implements View.OnClickListen
                     return;
                 }
 
-                if (offer.getLoaner().getId().equals(mainPref.getString(PreferenceNames.PREF_USER_ID, ""))) {
+                else if (offer.getLoaner().getId().equals(mainPref.getString(PreferenceNames.PREF_USER_ID, ""))) {
                     Toast.makeText(getContext(), "Can't request, this is your own offer!", Toast.LENGTH_LONG).show();
                     return;
                 }
