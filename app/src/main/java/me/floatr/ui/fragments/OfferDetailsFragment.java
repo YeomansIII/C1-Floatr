@@ -18,9 +18,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.floatr.R;
+import me.floatr.models.Initiate;
 import me.floatr.models.Loan;
 import me.floatr.models.LoanOffer;
 import me.floatr.ui.activities.MainActivity;
@@ -41,6 +45,9 @@ public class OfferDetailsFragment extends Fragment implements View.OnClickListen
 
     @BindView(R.id.offerDetailFragNameText)
     public TextView offerDetailFragNameText;
+
+    @BindView(R.id.offerDetailBankSpinner)
+    public Spinner bankDropdown;
 
     @BindView(R.id.offerDetailFragMinRangeValue)
     public TextView offerDetailFragMinRangeValue;
@@ -118,6 +125,11 @@ public class OfferDetailsFragment extends Fragment implements View.OnClickListen
         lastName = getArguments().getString("lastname");
         initiate = getArguments().getInt("initiateValue");
 
+        Set<String> bankAccounts = mainPref.getStringSet(PreferenceNames.PREF_USER_BANK_ACCOUNTS, new HashSet<String>());
+        String[] bankAccountsArr = bankAccounts.toArray(new String[bankAccounts.size()]);
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, bankAccountsArr);
+        bankDropdown.setAdapter(adapter2);
+
 
         Call<LoanOffer> offerCall = mainActivity.apiService.getLoanOffer(offerId);
         offerCall.enqueue(new Callback<LoanOffer>() {
@@ -138,7 +150,7 @@ public class OfferDetailsFragment extends Fragment implements View.OnClickListen
 
 
                 if (offer.getStatus().equals("initiated")) {
-                    offerDetailFragNameText.setText(firstname + lastName);
+                    offerDetailFragNameText.setText(firstname + " " + lastName);
                     sliderMinRange.setVisibility(View.INVISIBLE);
                     sliderMaxRange.setVisibility(View.INVISIBLE);
                     offerDetailFragMaxRangeValue.setVisibility(View.INVISIBLE);
@@ -181,6 +193,7 @@ public class OfferDetailsFragment extends Fragment implements View.OnClickListen
             }
         });
 
+
         initiateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -189,7 +202,10 @@ public class OfferDetailsFragment extends Fragment implements View.OnClickListen
                     Toast.makeText(getContext(), "Can't request, this is your own offer!", Toast.LENGTH_LONG).show();
                     return;
                 }
-                Call<Loan> loanCall = mainActivity.apiService.initiate(offer.getId(), Integer.parseInt(sliderText.getText().toString()));
+
+
+                Call<Loan> loanCall = mainActivity.apiService.initiate(offer.getId(), new Initiate(
+                        Integer.parseInt(sliderText.getText().toString()), (String) bankDropdown.getSelectedItem() ));
                 loanCall.enqueue(new Callback<Loan>() {
                     @Override
                     public void onResponse(Call<Loan> call, Response<Loan> response) {

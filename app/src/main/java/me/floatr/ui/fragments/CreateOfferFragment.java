@@ -75,10 +75,7 @@ public class CreateOfferFragment extends Fragment implements View.OnClickListene
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, items);
         dropdown.setAdapter(adapter);
 
-        Set<String> bankAccounts = pref.getStringSet(PreferenceNames.PREF_USER_BANK_ACCOUNTS, new HashSet<String>());
-        String[] bankAccountsArr = bankAccounts.toArray(new String[bankAccounts.size()]);
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, bankAccountsArr);
-        bankDropdown.setAdapter(adapter2);
+
 
         createOfferFragCreateButton.setOnClickListener(this);
 

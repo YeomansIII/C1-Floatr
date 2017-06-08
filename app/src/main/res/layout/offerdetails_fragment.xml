@@ -146,6 +146,13 @@
             android:layout_centerHorizontal="true"
             android:text="Initiate" />
 
+        <Spinner
+            android:id="@+id/offerDetailBankSpinner"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/createOfferFragPeriodUnitText" />
+
         <TextView
             android:id="@+id/sliderMinRange"
             android:layout_width="wrap_content"

@@ -5,6 +5,7 @@ import android.content.IntentFilter;
 import java.util.List;
 
 import me.floatr.models.Auth;
+import me.floatr.models.Initiate;
 import me.floatr.models.Loan;
 import me.floatr.models.LoanOffer;
 import me.floatr.models.Login;
@@ -74,7 +75,7 @@ public interface FloatrApiInterface {
     Call<Auth> login(@Body Login login);
 
     @PUT("loan-offer/{id}/initiate")
-    Call<Loan> initiate(@Path("id") String id, @Body Integer initiateValue);
+    Call<Loan> initiate(@Path("id") String id, @Body Initiate init);
 
     @GET("user/{id}/offers")
     Call<List<Loan>> getOfferForUser(@Path("id") String id);
