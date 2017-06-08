@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -51,6 +53,21 @@ public class OfferDetailsFragment extends Fragment implements View.OnClickListen
     @BindView(R.id.offerDetailFragPeriodUnit)
     public TextView offerDetailFragPeriodUnit;
 
+    @BindView(R.id.seekBar)
+    public SeekBar seekBar;
+
+    @BindView(R.id.sliderMaxRange)
+    public TextView sliderMaxRange;
+
+    @BindView(R.id.sliderMinRange)
+    public TextView sliderMinRange;
+
+    @BindView(R.id.sliderText)
+    public TextView sliderText;
+
+    @BindView(R.id.initiateButton)
+    public Button initiateButton;
+
     String offerId;
     LoanOffer offer;
 
@@ -78,7 +95,7 @@ public class OfferDetailsFragment extends Fragment implements View.OnClickListen
             {
                 if( keyCode == KeyEvent.KEYCODE_BACK )
                 {
-                    mainActivity.getSupportFragmentManager().beginTransaction().replace(R.id.container, new HomeFragment()).commit();
+                    mainActivity.getSupportFragmentManager().beginTransaction().replace(R.id.container, new LoanOffersFragment()).commit();
                     return true;
                 }
                 return false;
@@ -99,6 +116,12 @@ public class OfferDetailsFragment extends Fragment implements View.OnClickListen
                 offerDetailFragInterestRateValue.setText("" + offer.getInterestRate());
                 offerDetailFragPeriodValue.setText("" + offer.getPeriod());
                 offerDetailFragPeriodUnit.setText("" + offer.getPeriodUnit());
+                offerDetailFragNameText.setText("" + offer.getLoaner().getFirstName() + " "
+                        + offer.getLoaner().getLastName());
+
+                sliderMaxRange.setText(offer.getMaxOffer() + "");
+                sliderMinRange.setText(offer.getMinOffer() + "");
+                sliderText.setText(offer.getMinOffer() + "");
             }
 
             @Override
@@ -106,6 +129,39 @@ public class OfferDetailsFragment extends Fragment implements View.OnClickListen
 
             }
         });
+
+
+
+        seekBar.setMax(100);
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                double percent = (double)progress/100;
+                int min = offer.getMinOffer();
+                int max = offer.getMaxOffer();
+                double prog = min + (percent * (max - min));
+                sliderText.setText(Math.round(prog) + "");
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        initiateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //handle initiate
+            }
+        });
+
+
 
         this.view = view;
         return view;

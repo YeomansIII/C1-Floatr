@@ -81,8 +81,6 @@ public class CreateOfferFragment extends Fragment implements View.OnClickListene
     public void onClick(View v) {
         if (v == createOfferFragCreateButton) {
             LoanOffer newOffer = new LoanOffer();
-            Log.d("CreateOffer", pref.getString(PreferenceNames.PREF_USER_MONGO_ID, "ID from Mongo is NULL"));
-            newOffer.setLoaner(pref.getString(PreferenceNames.PREF_USER_MONGO_ID, ""));
             newOffer.setMinOffer(Integer.parseInt(createOfferFragMin.getEditText().getText().toString()));
             newOffer.setMaxOffer(Integer.parseInt(createOfferFragMax.getEditText().getText().toString()));
             newOffer.setInterestRate(Double.parseDouble(createOfferFragInterestRate.getEditText().getText().toString()));

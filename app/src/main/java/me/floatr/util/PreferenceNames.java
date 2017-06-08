@@ -16,5 +16,4 @@ public class PreferenceNames {
     public static final String PREF_USER_CUSTOMER_ID = "user_customer_id";
     public static final String PREF_USER_RATING = "user_rating";
     public static final String PREF_USER_AVATAR_URL = "user_avatar_url";
-    public static final String PREF_USER_MONGO_ID = "user_mongo_id";
 }

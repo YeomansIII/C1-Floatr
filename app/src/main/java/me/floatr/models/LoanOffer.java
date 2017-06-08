@@ -13,7 +13,12 @@ public class LoanOffer {
     private String id;
     @SerializedName("loaner")
     @Expose
-    private String loaner;
+    private User loaner;
+
+    public User getLoaner() {
+        return loaner;
+    }
+
     @SerializedName("min_offer")
     @Expose
     private Integer minOffer;
@@ -38,19 +43,6 @@ public class LoanOffer {
         this.id = id;
     }
 
-    /**
-     * @return The loaner
-     */
-    public String getLoaner() {
-        return loaner;
-    }
-
-    /**
-     * @param loaner The loaner
-     */
-    public void setLoaner(String loaner) {
-        this.loaner = loaner;
-    }
 
     /**
      * @return The minOffer
@@ -123,7 +115,7 @@ public class LoanOffer {
     }
 
     public String toString() {
-        return "loaner: " + this.loaner + "; " + "max: " + this.maxOffer + "; "
+        return "max: " + this.maxOffer + "; "
                 +"min: " + this.minOffer + "; " + "interest_rate: " + this.interestRate + "; "
                 +"period: " + this.period + "; " + "periodUnit: " + this.periodUnit;
     }

@@ -19,7 +19,6 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.floatr.R;
-import me.floatr.ui.fragments.HomeFragment;
 import me.floatr.ui.fragments.LoginFragment;
 import me.floatr.ui.fragments.LoanOffersFragment;
 import me.floatr.util.FloatrApiInterface;
@@ -138,6 +137,6 @@ public class MainActivity extends AppCompatActivity
         InputMethodManager inputMethodManager = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(drawerLayout.getWindowToken(), 0);
         setUpNavigation();
-        getSupportFragmentManager().beginTransaction().replace(R.id.container, new HomeFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.container, new LoanOffersFragment()).commit();
     }
 }
