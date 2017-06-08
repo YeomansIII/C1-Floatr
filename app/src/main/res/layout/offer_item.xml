@@ -21,6 +21,18 @@
         android:gravity="center_vertical">
 
         <TextView
+            android:id="@+id/offerItemRequestText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="40dp"
+            android:layout_marginTop="14dp"
+            android:text="Request"
+            android:textColor="#FF0000"
+            android:visibility="invisible" />
+
+        <TextView
             android:id="@+id/offerItemRange"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -54,4 +66,5 @@
             android:text="3 months"
             android:textSize="16dp" />
     </RelativeLayout>
+
 </RelativeLayout>

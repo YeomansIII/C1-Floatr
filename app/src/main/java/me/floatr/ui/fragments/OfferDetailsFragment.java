@@ -1,6 +1,7 @@
 package me.floatr.ui.fragments;
 
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.floatr.R;
+import me.floatr.models.Loan;
 import me.floatr.models.LoanOffer;
 import me.floatr.ui.activities.MainActivity;
 import me.floatr.util.PreferenceNames;
@@ -73,6 +75,10 @@ public class OfferDetailsFragment extends Fragment implements View.OnClickListen
     String offerId;
     LoanOffer offer;
 
+    String firstname;
+    String lastName;
+    Integer initiate;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,6 +114,10 @@ public class OfferDetailsFragment extends Fragment implements View.OnClickListen
         mainActivity.getSupportActionBar().setTitle("Loan Offer");
 
         offerId = getArguments().getString("id");
+        firstname = getArguments().getString("firstname");
+        lastName = getArguments().getString("lastname");
+        initiate = getArguments().getInt("initiateValue");
+
 
         Call<LoanOffer> offerCall = mainActivity.apiService.getLoanOffer(offerId);
         offerCall.enqueue(new Callback<LoanOffer>() {
@@ -125,6 +135,20 @@ public class OfferDetailsFragment extends Fragment implements View.OnClickListen
                 sliderMaxRange.setText(offer.getMaxOffer() + "");
                 sliderMinRange.setText(offer.getMinOffer() + "");
                 sliderText.setText(offer.getMinOffer() + "");
+
+
+                if (offer.getStatus().equals("initiated")) {
+                    offerDetailFragNameText.setText(firstname + lastName);
+                    sliderMinRange.setVisibility(View.INVISIBLE);
+                    sliderMaxRange.setVisibility(View.INVISIBLE);
+                    offerDetailFragMaxRangeValue.setVisibility(View.INVISIBLE);
+                    offerDetailFragMinRangeValue.setVisibility(View.INVISIBLE);
+                    double progress = ((double) (initiate - offer.getMinOffer())) / (offer.getMaxOffer() - offer.getMinOffer()) * 100;
+                    seekBar.setProgress((int) progress);
+                    seekBar.setEnabled(false);
+                    initiateButton.setText("Confirm Request?");
+                }
+
             }
 
             @Override
@@ -165,7 +189,18 @@ public class OfferDetailsFragment extends Fragment implements View.OnClickListen
                     Toast.makeText(getContext(), "Can't request, this is your own offer!", Toast.LENGTH_LONG).show();
                     return;
                 }
-                mainActivity.apiService.initiate(Integer.parseInt(sliderText.getText().toString()));
+                Call<Loan> loanCall = mainActivity.apiService.initiate(offer.getId(), Integer.parseInt(sliderText.getText().toString()));
+                loanCall.enqueue(new Callback<Loan>() {
+                    @Override
+                    public void onResponse(Call<Loan> call, Response<Loan> response) {
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<Loan> call, Throwable t) {
+
+                    }
+                });
                 mainActivity.getSupportFragmentManager().beginTransaction().replace(R.id.container, new LoanOffersFragment()).commit();
 
             }

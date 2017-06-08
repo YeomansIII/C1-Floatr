@@ -21,6 +21,8 @@
         import com.google.gson.annotations.Expose;
         import com.google.gson.annotations.SerializedName;
 
+        import butterknife.Optional;
+
 
 public class Loan {
 
@@ -32,7 +34,24 @@ public class Loan {
     @Expose
     private User loaner;
 
+    public int getInitiateValue() {
+        return initiateValue;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public Integer getMinOffer() {
+        return minOffer;
+    }
+
+    public Integer getMaxOffer() {
+        return maxOffer;
+    }
+
     @SerializedName("loanee")
+
     @Expose
     private User loanee;
 

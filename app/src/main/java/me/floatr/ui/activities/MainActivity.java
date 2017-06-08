@@ -21,6 +21,7 @@ import butterknife.ButterKnife;
 import me.floatr.R;
 import me.floatr.ui.fragments.LoginFragment;
 import me.floatr.ui.fragments.LoanOffersFragment;
+import me.floatr.ui.fragments.YourOffersFragment;
 import me.floatr.util.FloatrApiInterface;
 import me.floatr.util.PreferenceNames;
 import me.floatr.util.ServiceGenerator;
@@ -100,7 +101,8 @@ public class MainActivity extends AppCompatActivity
             getSupportFragmentManager().beginTransaction().replace(R.id.container, new LoanOffersFragment()).addToBackStack(null).commit();
             // Handle the camera action
         } else if (id == R.id.nav_offers) {
-
+            Log.d(TAG, "Nav_Offers");
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, new YourOffersFragment()).addToBackStack(null).commit();
         } else if (id == R.id.nav_loans) {
 
         } else if (id == R.id.nav_share) {

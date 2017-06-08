@@ -10,22 +10,30 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
 import me.floatr.R;
+import me.floatr.models.Loan;
 import me.floatr.models.LoanOffer;
 import me.floatr.models.Offer;
 import me.floatr.ui.activities.MainActivity;
 import me.floatr.ui.adapters.LoanOfferRecyclerAdapter;
+import me.floatr.ui.adapters.LoanRecyclerAdapter;
 import me.floatr.util.PreferenceNames;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by jason on 10/29/16.
  */
 
-public class YourOffersFragment extends Fragment implements View.OnClickListener {
+public class YourOffersFragment extends Fragment{
 
     private static final String KEY_LAYOUT_MANAGER = "layoutManager";
     private static final int SPAN_COUNT = 2;
@@ -40,10 +48,20 @@ public class YourOffersFragment extends Fragment implements View.OnClickListener
     private View view;
     private MainActivity mainActivity;
     private SharedPreferences mainPref;
-    private LoanOfferRecyclerAdapter loanOfferRecyclerAdapter;
-    private List<LoanOffer> offers;
+    private LoanRecyclerAdapter loanRecyclerAdapter;
+    private List<Loan> loans;
 
+    @BindView(R.id.seekBar)
+    public SeekBar seekBar;
 
+    @BindView(R.id.sliderMaxRange)
+    public TextView sliderMaxRange;
+
+    @BindView(R.id.sliderMinRange)
+    public TextView sliderMinRange;
+
+    @BindView(R.id.sliderText)
+    public TextView sliderText;
 
 
     View loadOverlay;
@@ -57,7 +75,7 @@ public class YourOffersFragment extends Fragment implements View.OnClickListener
 
         mainActivity = (MainActivity) getActivity();
         mainPref = mainActivity.getSharedPreferences(PreferenceNames.MAIN_PREFS_NAME, 0);
-        offers = new ArrayList<>();
+        loans = new ArrayList<>();
     }
 
     @Override
@@ -82,24 +100,32 @@ public class YourOffersFragment extends Fragment implements View.OnClickListener
                 1);
         mRecyclerView.addItemDecoration(dividerItemDecoration);
 
-        offers.add(new LoanOffer());
-        offers.add(new LoanOffer());
 
-        loanOfferRecyclerAdapter = new LoanOfferRecyclerAdapter(offers, getContext());
-        mRecyclerView.setAdapter(loanOfferRecyclerAdapter);
-
+        setOffersForUserFromDB();
 
 
         this.view = view;
         return view;
     }
 
-    @Override
-    public void onClick(View v) {
-        if (v == view.findViewById(R.id.offerFragCreateFab)) {
-            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,new CreateOfferFragment()).addToBackStack(null).commit();
-        }
+    public void setOffersForUserFromDB() {
+        Call<List<Loan>> listLoanCall = mainActivity.apiService.getOfferForUser(mainPref.getString(PreferenceNames.PREF_USER_ID, ""));
+        listLoanCall.enqueue(new Callback<List<Loan>>() {
+            @Override
+            public void onResponse(Call<List<Loan>> call, Response<List<Loan>> response) {
+                for (Loan l: response.body()) {
+                    loans.add(l);
+                }
+                loanRecyclerAdapter = new LoanRecyclerAdapter(loans, getContext());
+                mRecyclerView.setAdapter(loanRecyclerAdapter);
 
+            }
+
+            @Override
+            public void onFailure(Call<List<Loan>> call, Throwable t) {
+
+            }
+        });
     }
 
     /**

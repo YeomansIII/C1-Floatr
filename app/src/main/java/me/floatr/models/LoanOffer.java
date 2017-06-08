@@ -18,7 +18,13 @@ public class LoanOffer {
     public User getLoaner() {
         return loaner;
     }
+
+    public String getStatus() {
+        return status;
+    }
+
     @SerializedName("min_offer")
+
     @Expose
     private Integer minOffer;
     @SerializedName("max_offer")
@@ -33,6 +39,10 @@ public class LoanOffer {
     @SerializedName("period_unit")
     @Expose
     private String periodUnit;
+
+    @SerializedName("status")
+    @Expose
+    private String status;
 
     public String getId() {
         return id;
