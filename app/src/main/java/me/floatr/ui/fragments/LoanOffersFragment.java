@@ -70,6 +70,7 @@ public class LoanOffersFragment extends Fragment implements View.OnClickListener
         View view = inflater.inflate(R.layout.offer_fragment,
                 container, false);
         offers = new ArrayList<>();
+        mainActivity.getSupportActionBar().setTitle("Loan Offers");
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.offerListRecyclerView);
         mLayoutManager = new LinearLayoutManager(getActivity());

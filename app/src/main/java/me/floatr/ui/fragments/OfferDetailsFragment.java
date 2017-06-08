@@ -87,6 +87,7 @@ public class OfferDetailsFragment extends Fragment implements View.OnClickListen
         View view = inflater.inflate(R.layout.offerdetails_fragment,
                 container, false);
         ButterKnife.bind(this, view);
+        mainActivity.getSupportActionBar().setTitle("Offer Details");
 
         view.setFocusableInTouchMode(true);
         view.requestFocus();

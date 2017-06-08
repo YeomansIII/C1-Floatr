@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.floatr.R;
@@ -89,6 +92,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                             Log.d("Login", response.message());
                             Log.d("Login", call.request().url().toString());
                             User user = response.body();
+                            Set<String> bankSet = new HashSet<String>();
+                            bankSet.addAll(user.getBankAccounts());
                             pref.edit()
                                     .putString(PreferenceNames.PREF_USER_FIRST_NAME, user.getFirstName())
                                     .putString(PreferenceNames.PREF_USER_LAST_NAME, user.getLastName())
@@ -96,6 +101,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                                     .putInt(PreferenceNames.PREF_USER_RATING, user.getRating())
                                     .putString(PreferenceNames.PREF_USER_AVATAR_URL, user.getAvatarUrl())
                                     .putString(PreferenceNames.PREF_USER_ID, user.getId())
+                                    .putStringSet(PreferenceNames.PREF_USER_BANK_ACCOUNTS, bankSet)
                                     .commit();
                             mainActivity.finishLogin();
                         }

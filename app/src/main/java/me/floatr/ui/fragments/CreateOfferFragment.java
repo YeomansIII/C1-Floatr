@@ -14,6 +14,9 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.floatr.R;
@@ -37,6 +40,8 @@ public class CreateOfferFragment extends Fragment implements View.OnClickListene
 
     @BindView(R.id.createOfferSpinner)
     public Spinner dropdown;
+    @BindView(R.id.createOfferBankSpinner)
+    public Spinner bankDropdown;
     @BindView(R.id.createOfferFragMin)
     public TextInputLayout createOfferFragMin;
     @BindView(R.id.createOfferFragMax)
@@ -66,10 +71,14 @@ public class CreateOfferFragment extends Fragment implements View.OnClickListene
                 container, false);
         ButterKnife.bind(this, view);
         mainActivity.getSupportActionBar().setTitle("Create Loan Offer");
-        dropdown = (Spinner) view.findViewById(R.id.createOfferSpinner);
         String[] items = new String[]{"day", "month", "year"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, items);
         dropdown.setAdapter(adapter);
+
+        Set<String> bankAccounts = pref.getStringSet(PreferenceNames.PREF_USER_BANK_ACCOUNTS, new HashSet<String>());
+        String[] bankAccountsArr = bankAccounts.toArray(new String[bankAccounts.size()]);
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, bankAccountsArr);
+        bankDropdown.setAdapter(adapter2);
 
         createOfferFragCreateButton.setOnClickListener(this);
 

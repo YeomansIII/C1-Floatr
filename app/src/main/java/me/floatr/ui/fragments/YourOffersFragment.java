@@ -65,6 +65,7 @@ public class YourOffersFragment extends Fragment implements View.OnClickListener
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.offer_fragment,
                 container, false);
+        mainActivity.getSupportActionBar().setTitle("Your Offers");
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.offerListRecyclerView);
         mLayoutManager = new LinearLayoutManager(getActivity());
