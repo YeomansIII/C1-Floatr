@@ -5,7 +5,7 @@
     android:layout_height="72dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/offerItemUserImage"
+        android:id="@+id/preLoanItemUserImage"
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:paddingLeft="16dp"
@@ -17,11 +17,11 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_toEndOf="@+id/offerItemUserImage"
+        android:layout_toEndOf="@+id/preLoanItemUserImage"
         android:gravity="center_vertical">
 
         <TextView
-            android:id="@+id/offerItemRange"
+            android:id="@+id/preLoanItemRange"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="$500 - $600"
@@ -29,28 +29,28 @@
             android:textSize="16dp" />
 
         <TextView
-            android:id="@+id/offerItemAt"
+            android:id="@+id/preLoanItemAt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/offerItemRange"
+            android:layout_toRightOf="@+id/preLoanItemRange"
             android:text=" \@ "
             android:textColor="@color/material_color_black"
             android:textSize="16dp" />
 
         <TextView
-            android:id="@+id/offerItemInterest"
+            android:id="@+id/preLoanItemInterest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/offerItemAt"
+            android:layout_toRightOf="@+id/preLoanItemAt"
             android:text="2.6%"
             android:textColor="@color/material_color_black"
             android:textSize="16dp" />
 
         <TextView
-            android:id="@+id/offerItemPeriod"
+            android:id="@+id/preLoanItemPeriod"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/offerItemRange"
+            android:layout_below="@+id/preLoanItemRange"
             android:text="3 months"
             android:textSize="16dp" />
     </RelativeLayout>

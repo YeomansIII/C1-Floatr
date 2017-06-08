@@ -18,45 +18,45 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.floatr.R;
-import me.floatr.models.LoanOffer;
+import me.floatr.models.LoanRequest;
 
 /**
  * Created by jason on 2/9/16.
  */
-public class LoanOfferRecyclerAdapter extends RecyclerView.Adapter<LoanOfferRecyclerAdapter.ViewHolder> {
+public class LoanRequestRecyclerAdapter extends RecyclerView.Adapter<LoanRequestRecyclerAdapter.ViewHolder> {
 
-    List<LoanOffer> loanOffers;
+    List<LoanRequest> loanRequests;
     Context context;
     AppCompatActivity activity;
 
-    public LoanOfferRecyclerAdapter() {
-        loanOffers = new ArrayList<>();
+    public LoanRequestRecyclerAdapter() {
+        loanRequests = new ArrayList<>();
     }
 
-    public LoanOfferRecyclerAdapter(List<LoanOffer> loanOffers) {
-        this.loanOffers = loanOffers;
+    public LoanRequestRecyclerAdapter(List<LoanRequest> loanRequests) {
+        this.loanRequests = loanRequests;
     }
 
     @Override
-    public LoanOfferRecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public LoanRequestRecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
         // Inflate the custom layout
-        View offerView = inflater.inflate(R.layout.pre_loan_item, parent, false);
+        View requestView = inflater.inflate(R.layout.pre_loan_item, parent, false);
 
         // Return a new holder instance
-        ViewHolder viewHolder = new ViewHolder(offerView, context);
+        ViewHolder viewHolder = new ViewHolder(requestView, context);
 
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(LoanOfferRecyclerAdapter.ViewHolder holder, int position) {
-        LoanOffer loanOffer = loanOffers.get(position);
-        holder.offerItemRange.setText(loanOffer.getMinOffer() + " - " + loanOffer.getMaxOffer());
-        holder.offerItemInterest.setText("" + loanOffer.getInterestRate() + "%");
-        holder.offerItemPeriod.setText(loanOffer.getPeriod() + " " + loanOffer.getPeriodUnit());
+    public void onBindViewHolder(LoanRequestRecyclerAdapter.ViewHolder holder, int position) {
+        LoanRequest loanRequest = loanRequests.get(position);
+        holder.requestItemRange.setText(loanRequest.getMinRequest() + " - " + loanRequest.getMaxRequest());
+        holder.requestItemInterest.setText("" + loanRequest.getInterestRate() + "%");
+        holder.requestItemPeriod.setText(loanRequest.getPeriod() + " " + loanRequest.getPeriodUnit());
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -64,11 +64,11 @@ public class LoanOfferRecyclerAdapter extends RecyclerView.Adapter<LoanOfferRecy
         // for any view that will be set as you render a row
         Context context;
         @BindView(R.id.preLoanItemRange)
-        TextView offerItemRange;
+        TextView requestItemRange;
         @BindView(R.id.preLoanItemInterest)
-        TextView offerItemInterest;
+        TextView requestItemInterest;
         @BindView(R.id.preLoanItemPeriod)
-        TextView offerItemPeriod;
+        TextView requestItemPeriod;
 
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
@@ -89,8 +89,8 @@ public class LoanOfferRecyclerAdapter extends RecyclerView.Adapter<LoanOfferRecy
 
     @Override
     public int getItemCount() {
-        if (loanOffers != null) {
-            return loanOffers.size();
+        if (loanRequests != null) {
+            return loanRequests.size();
         }
         return 0;
     }

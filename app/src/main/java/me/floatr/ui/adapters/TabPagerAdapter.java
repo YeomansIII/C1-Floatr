@@ -8,7 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import me.floatr.ui.fragments.LoanOffersFragment;
-import me.floatr.ui.fragments.RequestsFragment;
+import me.floatr.ui.fragments.LoanRequestsFragment;
 
 
 public class TabPagerAdapter extends FragmentStatePagerAdapter {
@@ -25,7 +25,7 @@ public class TabPagerAdapter extends FragmentStatePagerAdapter {
                 return new LoanOffersFragment();
             case 1:
                 //Fragment for Remote Recipe
-                return new RequestsFragment();
+                return new LoanRequestsFragment();
         }
         return null;
 
