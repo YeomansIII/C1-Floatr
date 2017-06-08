@@ -92,6 +92,7 @@ public class CreateOfferFragment extends Fragment implements View.OnClickListene
             newOffer.setInterestRate(Double.parseDouble(createOfferFragInterestRate.getEditText().getText().toString()));
             newOffer.setPeriod(Integer.parseInt(createOfferFragPeriod.getEditText().getText().toString()));
             newOffer.setPeriodUnit(dropdown.getSelectedItem().toString().toLowerCase());
+            newOffer.setLoanerBankAccount(bankDropdown.getSelectedItem().toString());
             Log.d("CreateOffer" , newOffer.toString());
             mainActivity.apiService = ServiceGenerator.createService(FloatrApiInterface.class, pref.getString(PreferenceNames.PREF_USER_TOKEN, ""));
             Call<LoanOffer> call = mainActivity.apiService.createLoanOffer(newOffer);

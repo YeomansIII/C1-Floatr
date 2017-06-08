@@ -14,17 +14,7 @@ public class LoanOffer {
     @SerializedName("loaner")
     @Expose
     private User loaner;
-
-    public User getLoaner() {
-        return loaner;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
     @SerializedName("min_offer")
-
     @Expose
     private Integer minOffer;
     @SerializedName("max_offer")
@@ -39,10 +29,29 @@ public class LoanOffer {
     @SerializedName("period_unit")
     @Expose
     private String periodUnit;
-
     @SerializedName("status")
     @Expose
     private String status;
+
+    public void setLoaner(User loaner) {
+        this.loaner = loaner;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getLoanerBankAccount() {
+        return loanerBankAccount;
+    }
+
+    public void setLoanerBankAccount(String loanerBankAccount) {
+        this.loanerBankAccount = loanerBankAccount;
+    }
+
+    @SerializedName("loaner_bank_account")
+    @Expose
+    private String loanerBankAccount;
 
     public String getId() {
         return id;
@@ -52,6 +61,13 @@ public class LoanOffer {
         this.id = id;
     }
 
+    public User getLoaner() {
+        return loaner;
+    }
+
+    public String getStatus() {
+        return status;
+    }
 
     /**
      * @return The minOffer
