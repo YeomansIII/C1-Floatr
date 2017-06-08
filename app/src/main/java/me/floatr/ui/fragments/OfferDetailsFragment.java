@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -157,7 +159,14 @@ public class OfferDetailsFragment extends Fragment implements View.OnClickListen
         initiateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //handle initiate
+
+                if (offer.getLoaner().getId().equals(mainPref.getString(PreferenceNames.PREF_USER_ID, ""))) {
+                    Toast.makeText(getContext(), "Can't request, this is your own offer!", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                mainActivity.apiService.initiate(Integer.parseInt(sliderText.getText().toString()));
+                mainActivity.getSupportFragmentManager().beginTransaction().replace(R.id.container, new LoanOffersFragment()).commit();
+
             }
         });
 

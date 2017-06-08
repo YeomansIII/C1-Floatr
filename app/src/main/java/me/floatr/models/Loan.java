@@ -24,45 +24,44 @@
 
 public class Loan {
 
+    @SerializedName("initiate_value")
+    @Expose
+    private int initiateValue;
+
     @SerializedName("loaner")
     @Expose
     private User loaner;
-    @SerializedName("loaner_bank_account")
-    @Expose
-    private String loanerBankAccount;
+
     @SerializedName("loanee")
     @Expose
     private User loanee;
-    @SerializedName("principle")
+
+    @SerializedName("_id")
     @Expose
-    private Integer principle;
+    private String id;
+
     @SerializedName("interest_rate")
     @Expose
     private Integer interestRate;
-    @SerializedName("minimum_payment")
+
+    @SerializedName("min_offer")
     @Expose
-    private Integer minimumPayment;
-    @SerializedName("next_payment")
+    private Integer minOffer;
+
+    @SerializedName("max_offer")
     @Expose
-    private Integer nextPayment;
-    @SerializedName("next_payment_due_date")
-    @Expose
-    private String nextPaymentDueDate;
-    @SerializedName("remaining_amount")
-    @Expose
-    private Integer remainingAmount;
-    @SerializedName("period")
+    private Integer maxOffer;
+
     @Expose
     private Integer period;
     @SerializedName("period_unit")
     @Expose
     private String periodUnit;
+
     @SerializedName("status")
     @Expose
     private String status;
-    @SerializedName("payments")
-    @Expose
-    private Integer payments;
+
 
     /**
      *
@@ -85,24 +84,6 @@ public class Loan {
     /**
      *
      * @return
-     * The loanerBankAccount
-     */
-    public String getLoanerBankAccount() {
-        return loanerBankAccount;
-    }
-
-    /**
-     *
-     * @param loanerBankAccount
-     * The loaner_bank_account
-     */
-    public void setLoanerBankAccount(String loanerBankAccount) {
-        this.loanerBankAccount = loanerBankAccount;
-    }
-
-    /**
-     *
-     * @return
      * The loanee
      */
     public User getLoanee() {
@@ -118,23 +99,6 @@ public class Loan {
         this.loanee = loanee;
     }
 
-    /**
-     *
-     * @return
-     * The principle
-     */
-    public Integer getPrinciple() {
-        return principle;
-    }
-
-    /**
-     *
-     * @param principle
-     * The principle
-     */
-    public void setPrinciple(Integer principle) {
-        this.principle = principle;
-    }
 
     /**
      *
@@ -154,77 +118,6 @@ public class Loan {
         this.interestRate = interestRate;
     }
 
-    /**
-     *
-     * @return
-     * The minimumPayment
-     */
-    public Integer getMinimumPayment() {
-        return minimumPayment;
-    }
-
-    /**
-     *
-     * @param minimumPayment
-     * The minimum_payment
-     */
-    public void setMinimumPayment(Integer minimumPayment) {
-        this.minimumPayment = minimumPayment;
-    }
-
-    /**
-     *
-     * @return
-     * The nextPayment
-     */
-    public Integer getNextPayment() {
-        return nextPayment;
-    }
-
-    /**
-     *
-     * @param nextPayment
-     * The next_payment
-     */
-    public void setNextPayment(Integer nextPayment) {
-        this.nextPayment = nextPayment;
-    }
-
-    /**
-     *
-     * @return
-     * The nextPaymentDueDate
-     */
-    public String getNextPaymentDueDate() {
-        return nextPaymentDueDate;
-    }
-
-    /**
-     *
-     * @param nextPaymentDueDate
-     * The next_payment_due_date
-     */
-    public void setNextPaymentDueDate(String nextPaymentDueDate) {
-        this.nextPaymentDueDate = nextPaymentDueDate;
-    }
-
-    /**
-     *
-     * @return
-     * The remainingAmount
-     */
-    public Integer getRemainingAmount() {
-        return remainingAmount;
-    }
-
-    /**
-     *
-     * @param remainingAmount
-     * The remaining_amount
-     */
-    public void setRemainingAmount(Integer remainingAmount) {
-        this.remainingAmount = remainingAmount;
-    }
 
     /**
      *
@@ -278,24 +171,6 @@ public class Loan {
      */
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    /**
-     *
-     * @return
-     * The payments
-     */
-    public Integer getPayments() {
-        return payments;
-    }
-
-    /**
-     *
-     * @param payments
-     * The payments
-     */
-    public void setPayments(Integer payments) {
-        this.payments = payments;
     }
 
 }

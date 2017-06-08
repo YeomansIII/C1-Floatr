@@ -73,6 +73,10 @@ public interface FloatrApiInterface {
     @POST("auth/login")
     Call<Auth> login(@Body Login login);
 
+    @PUT("loan-offer/{id}/initiate")
+    Call<Loan> initiate(@Body Integer initiateValue);
+
+
 
 //    @GET("group/{id}/users")
 //        Call<List<User>> groupList(@Path("id") int groupId, @Query("sort") String sort);

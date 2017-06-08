@@ -18,7 +18,6 @@ public class LoanOffer {
     public User getLoaner() {
         return loaner;
     }
-
     @SerializedName("min_offer")
     @Expose
     private Integer minOffer;

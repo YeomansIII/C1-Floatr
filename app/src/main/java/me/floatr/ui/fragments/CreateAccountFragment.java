@@ -96,6 +96,7 @@ public class CreateAccountFragment extends Fragment implements View.OnClickListe
                                     .putString(PreferenceNames.PREF_USER_CUSTOMER_ID, user.getCustomerId())
                                     .putInt(PreferenceNames.PREF_USER_RATING, user.getRating())
                                     .putString(PreferenceNames.PREF_USER_AVATAR_URL, user.getAvatarUrl())
+                                    .putString(PreferenceNames.PREF_USER_ID, user.getId())
                                     .commit();
                             mainActivity.finishLogin();
                         }
